@@ -1,0 +1,3 @@
+class Touch {
+  static;
+}

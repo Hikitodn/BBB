@@ -1,0 +1,9 @@
+{
+    "bundles": [{
+        "name": "game-screen",
+        "assets": [{
+            "name": "background",
+            "srcs": "images/screen.png"
+        }]
+    }]
+}

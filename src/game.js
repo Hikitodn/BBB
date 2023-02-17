@@ -1,6 +1,7 @@
-import { Application } from "pixi.js";
+import { Application, Assets } from "pixi.js";
 import { gameSetting } from "./setting";
-// import manifest from "../assets/manifest.json";
+import manifest from "../assets/manifest.json";
+import { GameScene } from "./scenes/gameScene";
 
 export default class Game {
   constructor() {
@@ -12,6 +13,11 @@ export default class Game {
       width: gameSetting.WIDTH,
       height: gameSetting.HEIGHT,
     });
-    // Assets.init({ manifest: manifest });
+    Assets.init({ manifest: manifest });
+  }
+
+  play() {
+    this.gameScene = new GameScene();
+    this.app.stage.addChild(this.gameScene);
   }
 }

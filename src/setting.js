@@ -1,4 +1,4 @@
 export const gameSetting = {
-  WIDTH: 512,
+  WIDTH: 360,
   HEIGHT: window.innerHeight,
 };
