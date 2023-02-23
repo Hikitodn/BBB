@@ -1,7 +1,7 @@
 export class Collider {
   constructor() {}
 
-  checkCollider() {
-    throw "";
+  checkCollider(objectToCheck) {
+    throw new Error("Need object to check collide");
   }
 }

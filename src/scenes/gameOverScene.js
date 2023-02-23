@@ -1,6 +1,6 @@
 import { Container } from "pixi.js";
 
-export class GameOver extends Container {
+export class GameOverScene extends Container {
   constructor() {
     super();
   }
