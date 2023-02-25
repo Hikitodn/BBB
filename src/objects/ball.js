@@ -14,9 +14,13 @@ export class Ball extends GameObject {
 
     this.ball.x = gameSetting.WIDTH / 2;
     this.ball.y = gameSetting.HEIGHT - 80;
-    this.ball.interactive = true;
-    this.ball.cursor = "pointer";
 
     this.addChild(this.ball);
+  }
+
+  setPosition(x, y) {
+    super.setPosition(x, y);
+    this.preX = this.x;
+    this.preY = this.y;
   }
 }

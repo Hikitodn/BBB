@@ -13,9 +13,13 @@ export class BallManager extends Container {
 
     this.ball = new Ball();
     this.addChild(this.ball);
+
+    // this.ball.on("pointerdown", this.onBallDragStart.bind(this));
   }
 
-  onBallDragStart() {
-    this.ball.alpha = 0.5;
-  }
+  onShootStart() {}
+
+  onShooting() {}
+
+  onShootEnd() {}
 }
