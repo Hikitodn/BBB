@@ -1,7 +1,11 @@
-export class Collider {
-  constructor() {}
+import { EventEmitter } from "@pixi/utils";
+
+export class Collider extends EventEmitter {
+  constructor() {
+    super();
+  }
 
   checkCollider(objectToCheck) {
-    throw new Error("Need object to check collide");
+    throw new Error("No object to check collide with");
   }
 }

@@ -1,4 +1,4 @@
-import { Assets, Container, Graphics, Rectangle, Ticker } from "pixi.js";
+import { Assets, Container, Rectangle, Ticker } from "pixi.js";
 import { getSpriteFromCache } from "../utils/util";
 import { gameSetting } from "../setting";
 import { GameOverScene } from "./gameOverScene";
@@ -27,6 +27,7 @@ export class GameScene extends Container {
     this.initBall();
     this.initPredictLine();
     this.initBox();
+    this.initEvent();
 
     Ticker.shared.add(this.loop.bind(this));
   }
@@ -45,9 +46,6 @@ export class GameScene extends Container {
     );
     this.interactive = true;
     this.hitArea = new Rectangle(0, 70, gameSetting.WIDTH, gameSetting.HEIGHT);
-    this.on("pointermove", (e) => {
-      this.predictLine.draw(e.global);
-    });
   }
 
   initBox() {
@@ -56,5 +54,23 @@ export class GameScene extends Container {
     this.addChild(this.box);
   }
 
-  loop() {}
+  initEvent() {
+    this.on("pointermove", this.onMouseDragging, this);
+    this.on("pointerdown", this.onMouseDragEnd, this);
+  }
+
+  onMouseDragging(e) {
+    this.predictLine.draw(e.global);
+    console.log(this.predictLine.angleShoot);
+  }
+
+  onMouseDragEnd(e) {
+    this.predictLine.draw(e.global);
+    this.ball.onShootStart(this.predictLine.angleShoot);
+    this.predictLine.clear();
+  }
+
+  loop(dt) {
+    this.ball.update(dt);
+  }
 }
