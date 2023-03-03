@@ -5,6 +5,7 @@ import { GameOverScene } from "./gameOverScene";
 import { Box } from "../objects/box";
 import { BallManager } from "../managers/ball_manager";
 import { PredictLine } from "../objects/pre_line";
+import { SatCollider } from "../colliders/sat_collider";
 
 export class GameScene extends Container {
   constructor() {
@@ -49,19 +50,19 @@ export class GameScene extends Container {
   }
 
   initBox() {
-    this.box = new Box();
-    this.box.y = 80;
+    this.box = new Box(0, 0, 50, 50);
     this.addChild(this.box);
   }
 
   initEvent() {
     this.on("pointermove", this.onMouseDragging, this);
     this.on("pointerdown", this.onMouseDragEnd, this);
+
+    this.test = new SatCollider();
   }
 
   onMouseDragging(e) {
     this.predictLine.draw(e.global);
-    console.log(this.predictLine.angleShoot);
   }
 
   onMouseDragEnd(e) {
@@ -72,5 +73,6 @@ export class GameScene extends Container {
 
   loop(dt) {
     this.ball.update(dt);
+    this.test.satCollider(this.box, this.ball);
   }
 }

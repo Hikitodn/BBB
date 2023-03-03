@@ -6,12 +6,9 @@ export class Ball extends GameObject {
   constructor() {
     super();
 
-    this.speed = 10;
+    // ball properties
+    this.speed = 5;
     this.isMoving = false;
-
-    // velocity
-    this.vx = 0;
-    this.vy = 0;
 
     // draw ball
     this.ball = new Graphics();
@@ -20,6 +17,7 @@ export class Ball extends GameObject {
     this.ball.endFill;
     this.addChild(this.ball);
 
+    // position
     this.x = gameSetting.WIDTH / 2;
     this.y = gameSetting.HEIGHT - 80;
   }
