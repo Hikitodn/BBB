@@ -1,6 +1,6 @@
 import { Assets, Container, Rectangle, Ticker } from "pixi.js";
 import { getSpriteFromCache } from "../utils/util";
-import { gameSetting } from "../setting";
+import { gameSetting, GAME_BOTTOM, GAME_TOP, GAME_TOP_Y } from "../setting";
 import { GameOverScene } from "./gameOverScene";
 import { Box } from "../objects/box";
 import { BallManager } from "../managers/ball_manager";
@@ -46,7 +46,12 @@ export class GameScene extends Container {
       gameSetting.HEIGHT - 80
     );
     this.interactive = true;
-    this.hitArea = new Rectangle(0, 70, gameSetting.WIDTH, gameSetting.HEIGHT);
+    this.hitArea = new Rectangle(
+      0,
+      GAME_TOP_Y,
+      gameSetting.WIDTH,
+      gameSetting.HEIGHT - 160
+    );
   }
 
   initBox() {
@@ -73,6 +78,6 @@ export class GameScene extends Container {
 
   loop(dt) {
     this.ball.update(dt);
-    this.test.satCollider(this.box, this.ball);
+    // this.test.satCollider(this.box, this.ball);
   }
 }

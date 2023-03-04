@@ -1,5 +1,6 @@
 import { Container } from "pixi.js";
 import { Ball } from "../objects/ball";
+import { gameSetting, GAME_BOTTOM } from "../setting";
 
 export class BallManager extends Container {
   constructor() {
@@ -11,8 +12,8 @@ export class BallManager extends Container {
   initListBall() {
     this.listBalls = [];
 
-    this.ball = new Ball();
-    this.ball.getBounds();
+    this.ball = new Ball(0, 0, 5);
+    this.ball.setPosition(gameSetting.WIDTH / 2, gameSetting.HEIGHT - 80);
     this.addChild(this.ball);
   }
 
@@ -20,7 +21,6 @@ export class BallManager extends Container {
     this.ball.isMoving = true;
     this.ball.vx = Math.cos(angle) * this.ball.speed;
     this.ball.vy = -Math.sin(angle) * this.ball.speed;
-    console.log(this.ball.vx);
     this.onShooting();
     // console.log(angle);
   }
