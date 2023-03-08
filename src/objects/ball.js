@@ -1,6 +1,7 @@
 import { Graphics } from "pixi.js";
+import { CircleCollider } from "../colliders/circle_collider";
+import { ColliderEvent } from "../colliders/collider";
 import { GameObject } from "./game_object";
-import { checkLineCircle } from "../utils/util";
 
 export class Ball extends GameObject {
   constructor(x, y, r) {
@@ -15,7 +16,11 @@ export class Ball extends GameObject {
 
     // ball properties
     this.speed = 5;
+    this.radius = r;
     this.isMoving = false;
+
+    this.collider = new CircleCollider(x, y, r);
+    this.collider.on(ColliderEvent.Colliding, this.wallCollision.bind(this));
   }
 
   setPosition(x, y) {
@@ -26,5 +31,32 @@ export class Ball extends GameObject {
 
   update(dt) {
     super.update(dt);
+
+    this.collider.x = this.x;
+    this.collider.y = this.y;
+
+    let edgeCollision = this.collider.wallCollider();
+    if (edgeCollision) this.wallCollision(edgeCollision, true);
+  }
+
+  wallCollision(value, isWall = false) {
+    if (isWall === true) {
+      console.log(value);
+      if (value.indexOf("left") !== -1 && this.vx < 0) {
+        this.vx = -this.vx;
+      }
+      if (value.indexOf("right") !== -1 && this.vx > 0) {
+        this.vx = -this.vx;
+      }
+      if (value.indexOf("top") !== -1 && this.vy < 0) {
+        this.vy = -this.vy;
+      }
+      if (value.indexOf("bottom") !== -1) {
+        if (this.isMoving) {
+          this.vx = 0;
+          this.vy = 0;
+        }
+      }
+    }
   }
 }

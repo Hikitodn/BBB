@@ -1,11 +1,10 @@
 import { Assets, Container, Rectangle, Ticker } from "pixi.js";
 import { getSpriteFromCache } from "../utils/util";
-import { gameSetting, GAME_BOTTOM, GAME_TOP, GAME_TOP_Y } from "../setting";
+import { gameSetting, GAME_TOP_Y } from "../setting";
 import { GameOverScene } from "./gameOverScene";
 import { Box } from "../objects/box";
 import { BallManager } from "../managers/ball_manager";
 import { PredictLine } from "../objects/pre_line";
-import { SatCollider } from "../colliders/sat_collider";
 
 export class GameScene extends Container {
   constructor() {
@@ -63,7 +62,7 @@ export class GameScene extends Container {
     this.on("pointermove", this.onMouseDragging, this);
     this.on("pointerdown", this.onMouseDragEnd, this);
 
-    this.test = new SatCollider();
+    // this.test = new SatCollider();
   }
 
   onMouseDragging(e) {

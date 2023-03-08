@@ -19,22 +19,24 @@ export class BallManager extends Container {
 
   onShootStart(angle) {
     this.ball.isMoving = true;
-    this.ball.vx = Math.cos(angle) * this.ball.speed;
-    this.ball.vy = -Math.sin(angle) * this.ball.speed;
+    let vx = Math.cos(angle) * this.ball.speed;
+    let vy = -Math.sin(angle) * this.ball.speed;
+    this.ball.setVelocity(vx, vy);
     this.onShooting();
     // console.log(angle);
   }
 
   onShooting() {
-    if (this.ball.isMoving) {
-      this.ball.x += this.ball.vx;
-      this.ball.y += this.ball.vy;
-    }
+    // if (this.ball.isMoving) {
+    //   this.ball.x += this.ball.vx;
+    //   this.ball.y += this.ball.vy;
+    // }
   }
 
   onShootEnd() {}
 
   update(dt) {
+    this.ball.update(dt);
     this.onShooting();
   }
 }
